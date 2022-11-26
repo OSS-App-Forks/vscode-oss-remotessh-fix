@@ -20,3 +20,20 @@ To:
 > \n\ttar -xf vscode-server.tar.gz\n\tsed -i 's/if(this._environmentService.isBuilt)/if(!this._environmentService.isBuilt)/' vscode-server*/out/vs/server/node/server.main.js\n\tTAR_EXIT
 ```
 Pro-tip: Use [js-beautify](https://www.npmjs.com/package/js-beautify) to make extension.js more readable
+
+### Automating even further ...
+ -  First create this wrapper script in a dor belonging to your host's `$PATH`:
+ ```bash
+$ cat ~/bin/sedstr
+#!/bin/bash
+old="$1"
+new="$2"
+file="${3:--}"
+escOld=$(sed 's/[^^\\]/[&]/g; s/\^/\\^/g; s/\\/\\\\/g' <<< "$old")
+escNew=$(sed 's/[&/\]/\\&/g' <<< "$new")
+sed -i "s/$escOld/$escNew/g" "$file"
+```
+ - Now use this wrapper to modify the minified js:
+ ```bash
+ ~/bin/sedstr "\n\ttar -xf vscode-server.tar.gz\n\tTAR_EXIT" "\n\ttar -xf vscode-server.tar.gz\n\tsed -i 's/if(this._environmentService.isBuilt)/if(!this._environmentService.isBuilt)/' vscode-server*/out/vs/server/node/server.main.js\n\tTAR_EXIT" ~/.vscode-oss/extensions/ms-vscode-remote.remote-ssh-0.92.0/out/extension.js
+ ```
