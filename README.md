@@ -35,5 +35,6 @@ sed -i "s/$escOld/$escNew/g" "$file"
 ```
  - Now use this wrapper to modify the minified js:
  ```bash
+ set +H
  ~/bin/sedstr "\n\ttar -xf vscode-server.tar.gz\n\tTAR_EXIT" "\n\ttar -xf vscode-server.tar.gz\n\tsed -i 's/if(this._environmentService.isBuilt)/if(!this._environmentService.isBuilt)/' vscode-server*/out/vs/server/node/server.main.js\n\tTAR_EXIT" ~/.vscode-oss/extensions/ms-vscode-remote.remote-ssh-0.92.0/out/extension.js
  ```
