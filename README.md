@@ -19,4 +19,4 @@ To:
 ---
 > \n\ttar -xf vscode-server.tar.gz\n\tsed -i 's/if(this._environmentService.isBuilt)/if(!this._environmentService.isBuilt)/' vscode-server*/out/vs/server/node/server.main.js\n\tTAR_EXIT
 ```
-Pro-tip: Use js-beautify to make extension.js more readable
+Pro-tip: Use [js-beautify](https://www.npmjs.com/package/js-beautify) to make extension.js more readable
