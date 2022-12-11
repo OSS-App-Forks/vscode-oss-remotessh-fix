@@ -1,8 +1,10 @@
-# VSCode OSS Remote-SSH fix
+# VSCode OSS Remote-SSH fix (nov 2022)
+
+### Ensure to Replace `"serverApplicationName": "code-server-oss"` With `"serverApplicationName": "code-server"` in `product.json` of your VSCode
 ### Run this in the server after initial connection fails:
 ```bash
 sed -i 's/if(this.n.isBuilt)re/if(!this.n.isBuilt)re/' \
-    .vscode-server-oss/bin/6261075646f055b99068d3688932416f2346dd3b/out/vs/server/node/server.main.js
+    .vscode-server-oss/bin/5235c6bb189b60b01b1f49062f4ffa42384f8c91/out/vs/server/node/server.main.js
 ```
 ### To automate this on all servers
 Replace the following line in `~/.vscode-oss/extensions/ms-vscode-remote.remote-ssh-0.92.0/out/extension.js`:
